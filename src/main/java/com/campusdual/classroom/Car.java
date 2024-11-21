@@ -22,10 +22,10 @@ public class Car {
 
     //CONSTRUCTORES
 
-    public Car(String brand, String model, String fuel) {
-        this.brand = brand;
-        this.model = model;
-        this.fuel = fuel;
+    public Car() {
+        this.brand = "Porsche";
+        this.model = "911 Carrera 4 GTS";
+        this.fuel = "Gasolina";
     }
 
     //MÉTODOS CONDICIONALES
@@ -49,7 +49,7 @@ public class Car {
     //MÉTODOS DE ENCENDIDO Y APAGADO
 
     public void start() {
-        if (this.isTachometerEqualToZero()) {
+        if (isTachometerEqualToZero()) {
             this.tachometer = 1000;
             System.out.println("Vehículo encendido.");
         } else {
@@ -75,7 +75,7 @@ public class Car {
             if (this.isReverse() && this.speedometer == 25) {
                 System.out.println("El vehículo alcanzó la máxima velocidad marcha atrás.");
             } else {
-                if (this.isTachometerGreaterThanZero()) {
+                if (isTachometerGreaterThanZero()) {
                     this.speedometer += 5;
                     System.out.println("La nueva velocidad es " + this.speedometer);
                 } else {
@@ -120,9 +120,9 @@ public class Car {
         if (this.wheelsAngle + angle <= 45 && this.wheelsAngle + angle >= -45) {
             this.wheelsAngle += angle;
         } else {
-            System.out.println("No se ha podido girar " + angle + "º el volante. Supera el límite.");
+            this.wheelsAngle = (this.wheelsAngle + angle > 45) ? 45 : -45;
         }
-        System.out.println("Giro actual del volante: " + this.wheelsAngle + "º");
+        System.out.println("Giro actual del volante: " + this.wheelsAngle);
     }
 
     //MÉTODOS DE VISUALIZACIÓN DE DATOS
@@ -145,7 +145,8 @@ public class Car {
 
     public void showDetails() {
         System.out.println("\nDATOS DEL VEHÍCULO:\n");
-        System.out.println("El " + this.brand + " " + this.model + " tiene una velocidad de " + this.speedometer + " km/h");
+        System.out.println("El " + this.brand + " " + this.model + " tiene una velocidad de " + this.speedometer +
+                " km/h");
         System.out.println("Revoluciones: " + this.tachometer);
         System.out.println("Marcha engranada: " + this.gear);
         System.out.println(this.showSteeringWheelDetail());
