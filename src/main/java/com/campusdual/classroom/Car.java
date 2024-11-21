@@ -3,14 +3,14 @@ package com.campusdual.classroom;
 public class Car {
 
     //ATRIBUTOS
-    
+
     //CONSTANTES
-    
+
     public final int MAX_SPEED = 120;
     public final int REVERSE_TOP_SPEED = 20;
 
     //VARIABLES
-    
+
     String brand;
     String model;
     String fuel;
@@ -19,13 +19,13 @@ public class Car {
     String gear = "N";
     boolean reverse;
     int wheelsAngle;
-    
+
     //CONSTRUCTORES
 
-    public Car() {
-        this.brand = "Porsche";
-        this.model = "911 Carrera 4 GTS";
-        this.fuel = "Gasolina";
+    public Car(String brand, String model, String fuel) {
+        this.brand = brand;
+        this.model = model;
+        this.fuel = fuel;
     }
 
     //MÉTODOS CONDICIONALES
@@ -34,34 +34,34 @@ public class Car {
         return this.reverse;
     }
 
-    private boolean isOff(){
+    private boolean isOff() {
         return this.tachometer == 0;
     }
 
-    public boolean isTachometerGreaterThanZero(){
+    public boolean isTachometerGreaterThanZero() {
         return this.tachometer > 0;
     }
 
-    public boolean isTachometerEqualToZero(){
+    public boolean isTachometerEqualToZero() {
         return this.tachometer == 0;
     }
 
     //MÉTODOS DE ENCENDIDO Y APAGADO
 
-    public void start(){
-        if (isTachometerEqualToZero()){
+    public void start() {
+        if (this.isTachometerEqualToZero()) {
             this.tachometer = 1000;
             System.out.println("Vehículo encendido.");
-        }else{
+        } else {
             System.out.println("El vehículo ya está encendido.");
         }
     }
 
-    public void stop(){
-        if (this.speedometer == 0){
+    public void stop() {
+        if (this.speedometer == 0) {
             this.tachometer = 0;
             System.out.println("Vehículo apagado.");
-        }else{
+        } else {
             System.out.println("El vehículo no se puede apagar, vehículo en marcha.");
         }
     }
@@ -75,10 +75,10 @@ public class Car {
             if (this.isReverse() && this.speedometer == 25) {
                 System.out.println("El vehículo alcanzó la máxima velocidad marcha atrás.");
             } else {
-                if(isTachometerGreaterThanZero()){
-                    this.speedometer +=5;
+                if (this.isTachometerGreaterThanZero()) {
+                    this.speedometer += 5;
                     System.out.println("La nueva velocidad es " + this.speedometer);
-                }else{
+                } else {
                     System.out.println("No se puede acelerar. El vehículo está apagado.");
                 }
             }
@@ -97,19 +97,19 @@ public class Car {
     //MÉTODOS DE MARCHAS
 
     public void setReverse(boolean reverse) {
-        if(this.isReverse() != reverse){
-            if(this.speedometer == 0){
-                if(reverse){
+        if (this.isReverse() != reverse) {
+            if (this.speedometer == 0) {
+                if (reverse) {
                     this.gear = "R";
-                }else{
+                } else {
                     this.gear = "N";
                 }
                 this.reverse = reverse;
                 System.out.println("La marcha engranada es " + this.gear);
-            }else{
+            } else {
                 System.out.println("El vehículo debe estar detenido para cambiar la marcha.");
             }
-        }else{
+        } else {
             System.out.println("El vehículo ya tiene la marcha " + this.gear + " engranada.");
         }
     }
@@ -117,17 +117,12 @@ public class Car {
     //MÉTODOS RELACIONADOS CON EL GIRO DEL VOLANTE
 
     public void turnAngleOfWheels(int angle) {
-        if (this.wheelsAngle+angle <= 45 && this.wheelsAngle+angle >= -45) {
+        if (this.wheelsAngle + angle <= 45 && this.wheelsAngle + angle >= -45) {
             this.wheelsAngle += angle;
         } else {
-//            System.out.println("No se puede girar más.");
-            if(this.wheelsAngle+angle > 45){
-                this.wheelsAngle = 45;
-            }else{
-                this.wheelsAngle = -45;
-            }
+            System.out.println("No se ha podido girar " + angle + "º el volante. Supera el límite.");
         }
-        System.out.println("Giro actual del volante: " + this.wheelsAngle);
+        System.out.println("Giro actual del volante: " + this.wheelsAngle + "º");
     }
 
     //MÉTODOS DE VISUALIZACIÓN DE DATOS
@@ -150,8 +145,7 @@ public class Car {
 
     public void showDetails() {
         System.out.println("\nDATOS DEL VEHÍCULO:\n");
-        System.out.println("El " + this.brand + " " + this.model + " tiene una velocidad de " + this.speedometer +
-                " km/h");
+        System.out.println("El " + this.brand + " " + this.model + " tiene una velocidad de " + this.speedometer + " km/h");
         System.out.println("Revoluciones: " + this.tachometer);
         System.out.println("Marcha engranada: " + this.gear);
         System.out.println(this.showSteeringWheelDetail());
