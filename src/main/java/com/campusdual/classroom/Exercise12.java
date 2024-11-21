@@ -3,6 +3,10 @@ package com.campusdual.classroom;
 public class Exercise12 {
     public static void main(String[] args) {
         Car miCoche = new Car();
+        miCoche.setBrand("Porsche");
+        miCoche.setModel("911 Carrera 4 GTS");
+        miCoche.setFuel("Gasolina");
+        
         miCoche.start();
         miCoche.start();
 
